@@ -4,4 +4,5 @@
     <string name="email">Email</string>
     <string name="pwd">Password</string>
     <string name="lost_password">Forgot password ? Please contact \n <a href="mailto:support@matchplayer.com?Subject=Lost%20Password" target="_top">support@matchplayer.com</a></string>
+    <string name="register">Don\'t have an account ? <a href="" >REGISTER HERE</a></string>
 </resources>

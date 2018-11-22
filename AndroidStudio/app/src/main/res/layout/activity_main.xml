@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtLostpassword"
+        android:id="@+id/txtLostPassword"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         android:layout_gravity="center"
@@ -65,5 +65,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <view
+        android:id="@+id/view2"
+        style="@style/dividerHorizontal"
+        class="android.support.v7.widget.LinearLayoutCompat"
+        id="@+id/view"
+        android:layout_width="260dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="340dp"
+        android:layout_marginBottom="100dp"
+        android:autoLink="email"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/register"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

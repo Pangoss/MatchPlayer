@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="fr.fengdavid.matchplayer.viewmodels.LoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/logo" />
+
+            <!-- Email Label -->
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_email_login"
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:hint="@string/email"
+                android:text="@={viewModel.email}"
+                app:met_baseColor="@color/white"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="16sp"
+                app:met_iconLeft="@drawable/ic_email_white_24dp"
+                app:met_primaryColor="@color/colorAccent" />
+
+            <!-- Password Label -->
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_password_login"
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}"
+                app:met_baseColor="@color/white"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="16sp"
+                app:met_iconLeft="@drawable/ic_password_white_24dp"
+                app:met_primaryColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:enabled="@{viewModel.loginEnabled}"
+                android:onClick="@{() -> viewModel.onLoginClick()}"
+                android:padding="8dp"
+                android:text="@string/login"
+                android:theme="@style/accentButton" />
+
+            <TextView
+                android:id="@+id/tv_password_forgot"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/forgot_password"
+                android:textSize="16dip" />
+
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="209dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="120dp"
+                android:autoLink="email"
+                android:background="@color/colorPrimaryLight"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_account" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

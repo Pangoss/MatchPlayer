@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">MatchPlayer</string>
-    <string name="login">Login</string>
     <string name="email">Email</string>
-    <string name="pwd">Password</string>
-    <string name="lost_password">Forgot password ? Please contact \n <a href="mailto:support@matchplayer.com?Subject=Lost%20Password" target="_top">support@matchplayer.com</a></string>
-    <string name="register">Don\'t have an account ? <a href="" >REGISTER HERE</a></string>
+    <string name="password">Password</string>
+    <string name="login">LOG IN</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="register">REGISTER</string>
+    <string name="register_details">Please register to continue</string>
+    <string name="your_phone">YOUR PHONE NUMBER</string>
+    <string name="your_email">YOUR EMAIL</string>
+    <string name="your_name">YOUR NAME</string>
+    <string name="set_password">SET PASSWORD</string>
+    <string name="manage_profile">MANAGE YOUR PROFILE</string>
+    <string name="update">UPDATE</string>
+    <string name="enter_registered_email">Please enter your registered email</string>
+    <string name="reset">RESET</string>
 </resources>

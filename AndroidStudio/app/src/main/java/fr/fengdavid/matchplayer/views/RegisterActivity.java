@@ -24,17 +24,19 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_register
         );
+
         DaggerAppComponent.builder().build().inject(this);
         viewModel.setErrorListener(this);
         binding.setViewModel(viewModel);
 
-        MaterialEditText phoneEditText = binding.etPhone;
-        MaterialEditText emailEditText = binding.etEmail;
-        MaterialEditText nameEditText = binding.etName;
-        MaterialEditText passwordEditText = binding.etPassword;
+        MaterialEditText phoneEditText = binding.registerPhone;
+        MaterialEditText emailEditText = binding.registerEmail;
+        MaterialEditText nameEditText = binding.registerName;
+        MaterialEditText passwordEditText = binding.registerPassword;
 
         phoneEditText.setAutoValidate(true);
         emailEditText.setAutoValidate(true);

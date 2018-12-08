@@ -23,7 +23,11 @@
         <activity
             android:name=".views.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.ProfileActivity"></activity>
+        <activity android:name=".views.ProfileActivity" />
+
+        <activity
+            android:name=".views.HomeActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

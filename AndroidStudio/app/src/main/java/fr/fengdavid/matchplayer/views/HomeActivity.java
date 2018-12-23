@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import fr.fengdavid.matchplayer.R;
 import fr.fengdavid.matchplayer.databinding.ActivityHomeBinding;
 import fr.fengdavid.matchplayer.viewmodels.HomeActivityViewModel;
-import fr.fengdavid.matchplayer.viewmodels.LoginViewModel;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityViewModel.ViewListener{
     @Inject
@@ -22,14 +21,14 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityViewM
         super.onCreate(savedInstanceState);
         ActivityHomeBinding binding;//******
 
-        Button btnEditProfile = findViewById(R.id.btn_edit_profile);
+        Button btnEditProfile = findViewById(R.id.nav_edit_profile);
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(i);
             }
         });
-
+    /*
         Button btnEvents = findViewById(R.id.btn_events);
         btnEvents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -37,8 +36,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityViewM
                 startActivity(i);
             }
         });
+        */
 
-        Button btnSearchEvent= findViewById(R.id.btn_search_events);
+        Button btnSearchEvent= findViewById(R.id.nav_search_event);
         btnSearchEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, SearchEventActivity.class);
@@ -47,17 +47,5 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityViewM
         });
 
 
-    }
-
-    public void onEvents () {
-        //load Events Activity
-    }
-
-    public void onSearchEvents () {
-        //load Search Event Activity
-    }
-
-    public void onEditAccount () {
-        //load Edit Account Activity
     }
 }

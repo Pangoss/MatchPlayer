@@ -88,4 +88,5 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         Snackbar.make(mLlParent, message, Snackbar.LENGTH_LONG).show();
     }
+
 }

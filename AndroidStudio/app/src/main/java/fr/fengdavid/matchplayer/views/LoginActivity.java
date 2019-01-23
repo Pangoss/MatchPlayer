@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
         TextView tvPasswordForgot = findViewById(R.id.tv_password_forgot);
         tvPasswordForgot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class); //change
                 startActivity(i);
             }
         });

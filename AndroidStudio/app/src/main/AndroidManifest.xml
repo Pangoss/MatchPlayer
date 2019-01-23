@@ -24,7 +24,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".views.ProfileActivity" />
         <activity android:name=".views.SearchEventActivity" />
-        <activity android:name=".views.HomeActivity"></activity>
+        <activity android:name=".views.HomeActivity" />
+        <activity android:name=".views.SettingsActivity"></activity>
     </application>
 
 </manifest>

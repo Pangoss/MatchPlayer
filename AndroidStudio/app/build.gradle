@@ -40,12 +40,12 @@ dependencies {
     //material edit text
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     //dagger
-    implementation 'com.google.dagger:dagger:2.+'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.+'
-    implementation 'com.google.dagger:dagger-android:2.+'
+    implementation 'com.google.dagger:dagger:2.21'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.21'
+    implementation 'com.google.dagger:dagger-android:2.21'
     // If you're using classes in dagger.android
-    implementation 'com.google.dagger:dagger-android-support:2.+'
+    implementation 'com.google.dagger:dagger-android-support:2.21'
     // if you use the support libraries
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.+'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.21'
     implementation 'com.android.support:design:28.0.0'
 }

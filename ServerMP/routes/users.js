@@ -23,10 +23,10 @@ module.exports = router;
 /* Token gen and log verification */
 router.post('/login', function(req, res) {
   
- //console.log('the Username is', req.body.Username);    Uncomment for debug to see if user and pwd arrives to the serrver
- // console.log('the Password is', req.body.Password);
+ //console.log('the Username is', req.body.name);    Uncomment for debug to see if user and pwd arrives to the serrver
+ // console.log('the Password is', req.body.password);
 
- var hashedPassword =req.body.Password /* bcrypt.hashSync(req.body.Password, 4) */
+ //var hashedPassword =req.body.password /* bcrypt.hashSync(req.body.Password, 4) */
 
    User.findAll({ where: {
     	name : req.body.name,

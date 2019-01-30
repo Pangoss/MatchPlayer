@@ -9,12 +9,11 @@ var router = express.Router();
 
 
 //ROUTING
-
+var userRouter = require('./routes/users');
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
+app.use(`/users`, userRouter);
 
-var usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
 
 //ROUTING
 

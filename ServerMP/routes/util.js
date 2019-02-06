@@ -3,15 +3,26 @@ var config = require('../config');
 
 
 
-function(token) {
-
-
-  var token = req.headers['x-access-token'];
-  if (!token) return 1;  //NO TOKEN
+function tokenStatus(token) {
+ 
+    if (!token) 
+return new Promise((res, err) => {
+res(1)
+});
   
-  jwt.verify(token, config.secret, function(err, decoded) {
-    if (err) return 2; //AUTH FAILED, TOKEN IS WRONG OR EXPIRED
-    
-    return 0;  //AUTHENTICATED
-  });
-};  
+
+return new Promise(function(resolve, reject){
+	jwt.verify(token, config.secret, function(err, decode){
+
+		if (err){
+			reject(err)
+	        	return 
+		 }
+
+		resolve(decode)
+	});
+});
+
+} 
+module.exports = {
+    tokenStatus: tokenStatus, }

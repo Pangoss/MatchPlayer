@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var util = require('./util');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
@@ -11,14 +11,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 /* GET users listing. */
-router.get('/test', function (req,res) {
+router.get('/dBtest', function (req,res) {
    
   User.findAll().then(users => {
       res.send(users);
   });
 });
 
-module.exports = router;
+
 
 /* Token gen and log verification */
 router.post('/login', function(req, res) {
@@ -45,5 +45,24 @@ router.post('/login', function(req, res) {
     if (err) return res.status(500).send("Server error")
    });}
 );
+
+
+router.get('/authTest', function (req,res) {
+   
+  var token = req.headers['x-access-token'];
+
+
+  util.tokenStatus(token)
+	.then(function (data) {console.log(data)})
+	.catch(function (err) {console.log(err)});
+
+});
+
+
+
+
+
+
+
 
 module.exports = router;

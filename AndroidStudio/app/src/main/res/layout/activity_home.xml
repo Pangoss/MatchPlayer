@@ -33,9 +33,6 @@
         android:id="@+id/nav_btn"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="1dp"
         android:background="@color/lightGrey"
         app:itemTextColor="@android:color/black"
         app:labelVisibilityMode="labeled"
@@ -70,12 +67,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
+        android:onClick="onSetIcon"
         app:layout_constraintStart_toEndOf="@+id/tv_nickname"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_sport_basket" />

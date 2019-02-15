@@ -19,22 +19,23 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class register_request extends AppCompatActivity {
+public class registerRequest extends AppCompatActivity {
 
     private String URL_POST = "https://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/register";
     private String RequestRegisterName, RequestRegisterPassword, RequestRegisterPhone, RequestRegisterEmail;
-    private String data= "{"+
-            "\"name\"" + "\"" + RequestRegisterName + "\","+
-            "\"password\"" + "\"" + RequestRegisterPassword + "\","+
-            "\"email\"" + "\"" + RequestRegisterEmail + "\","+
-            "\"phonenumber\"" + "\"" + RequestRegisterPhone + "\""+
-            "}";
+    private String data;
 
-    public register_request(String RegisterName, String RegisterPassword, String RegisterPhone, String RegisterEmail){
+    public registerRequest(String RegisterName, String RegisterPassword, String RegisterPhone, String RegisterEmail){
         this.RequestRegisterName = RegisterName;
         this.RequestRegisterPassword = RegisterPassword;
         this.RequestRegisterPhone = RegisterPhone;
         this.RequestRegisterEmail = RegisterEmail;
+        this.data= "{"+
+                "\"name\":" + "\"" + RequestRegisterName + "\","+
+                "\"password\":" + "\"" + RequestRegisterPassword + "\","+
+                "\"email\":" + "\"" + RequestRegisterEmail + "\","+
+                "\"phonenumber\":" + "\"" + RequestRegisterPhone + "\""+
+                "}";
     }
 
     public void InsertRegisterDataToDb() {
@@ -47,7 +48,6 @@ public class register_request extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),obj_res.toString(),Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
-
                         }
                         //Log.d("Response", response);
                     }
@@ -84,7 +84,7 @@ public class register_request extends AppCompatActivity {
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
 }

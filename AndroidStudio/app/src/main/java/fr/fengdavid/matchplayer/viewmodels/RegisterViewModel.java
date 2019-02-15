@@ -19,7 +19,7 @@ import com.rengwuxian.materialedittext.validation.METValidator;
 
 import javax.inject.Inject;
 
-import fr.fengdavid.matchplayer.requests.register_request;
+import fr.fengdavid.matchplayer.requests.registerRequest;
 
 public class RegisterViewModel extends BaseObservable {
 
@@ -33,7 +33,7 @@ public class RegisterViewModel extends BaseObservable {
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
 
-    register_request register_request_data = new register_request(mName,mPassword,mPhone,mEmail);
+    registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
 
     @Inject
     public RegisterViewModel(
@@ -119,10 +119,10 @@ public class RegisterViewModel extends BaseObservable {
         if (isInputValid()) {
             setRegisterEnabled(false);
             try {
-                mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
-                mListener.onLoginSuccess();
                 // Save the user in DB
                 register_request_data.InsertRegisterDataToDb();
+                mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
+                mListener.onLoginSuccess();
             } catch (UserAlreadyExistsException e) {
                 Log.d("RegisterViewModel", "Error while saving: " + e.getMessage());
                 mListener.onError("User Already Exists", "User with given mEmail already exists.");

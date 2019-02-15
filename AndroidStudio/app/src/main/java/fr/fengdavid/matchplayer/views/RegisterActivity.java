@@ -44,10 +44,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         nameEditText.setAutoValidate(true);
         passwordEditText.setAutoValidate(true);
 
-        phoneEditText.addValidator(viewModel.getPhoneValidator());
-        emailEditText.addValidator(viewModel.getEmailValidator());
+        phoneEditText.addValidator(viewModel.getmPhoneValidator());
+        emailEditText.addValidator(viewModel.getmEmailValidator());
         nameEditText.addValidator(viewModel.getmNameValidator());
-        passwordEditText.addValidator(viewModel.getPasswordValidator());
+        passwordEditText.addValidator(viewModel.getmPasswordValidator());
     }
 
     @Override

@@ -3,6 +3,8 @@ package fr.fengdavid.matchplayer.viewmodels;
 import android.databinding.BaseObservable;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import fr.fengdavid.matchplayer.entities.User;
 import fr.fengdavid.matchplayer.repositories.UserAlreadyExistsException;
@@ -11,11 +13,15 @@ import fr.fengdavid.matchplayer.validators.EmailValidator;
 import fr.fengdavid.matchplayer.validators.NameValidator;
 import fr.fengdavid.matchplayer.validators.PasswordValidator;
 import fr.fengdavid.matchplayer.validators.PhoneValidator;
+import fr.fengdavid.matchplayer.views.RegisterActivity;
+
 import com.rengwuxian.materialedittext.validation.METValidator;
 
 import javax.inject.Inject;
 
-public class RegisterViewModel extends BaseObservable{
+import fr.fengdavid.matchplayer.requests.register_request;
+
+public class RegisterViewModel extends BaseObservable {
 
     private String mName, mPhone, mEmail, mPassword;
     private boolean mRegisterEnabled;
@@ -26,6 +32,8 @@ public class RegisterViewModel extends BaseObservable{
     private NameValidator mNameValidator;
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
+
+    register_request register_request_data = new register_request(mName,mPassword,mPhone,mEmail);
 
     @Inject
     public RegisterViewModel(
@@ -110,10 +118,11 @@ public class RegisterViewModel extends BaseObservable{
     public void onRegisterClick() {
         if (isInputValid()) {
             setRegisterEnabled(false);
-            // Save the user in DB
             try {
                 mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
                 mListener.onLoginSuccess();
+                // Save the user in DB
+                register_request_data.InsertRegisterDataToDb();
             } catch (UserAlreadyExistsException e) {
                 Log.d("RegisterViewModel", "Error while saving: " + e.getMessage());
                 mListener.onError("User Already Exists", "User with given mEmail already exists.");
@@ -123,11 +132,11 @@ public class RegisterViewModel extends BaseObservable{
         }
     }
 
-    public METValidator getPhoneValidator() {
+    public METValidator getmPhoneValidator() {
         return mPhoneValidator;
     }
 
-    public METValidator getEmailValidator() {
+    public METValidator getmEmailValidator() {
         return mEmailValidator;
     }
 
@@ -135,7 +144,7 @@ public class RegisterViewModel extends BaseObservable{
         return mNameValidator;
     }
 
-    public PasswordValidator getPasswordValidator() {
+    public PasswordValidator getmPasswordValidator() {
         return mPasswordValidator;
     }
 

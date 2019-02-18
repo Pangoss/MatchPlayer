@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import fr.fengdavid.matchplayer.R;
+import fr.fengdavid.matchplayer.structs.Event;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     private String sport;
     private int level;
     private int nEvents = 0;
+    private Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

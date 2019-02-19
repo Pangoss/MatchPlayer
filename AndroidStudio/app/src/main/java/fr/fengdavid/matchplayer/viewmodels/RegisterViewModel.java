@@ -32,8 +32,7 @@ public class RegisterViewModel extends BaseObservable {
     private NameValidator mNameValidator;
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
-
-    registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+    public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
 
     @Inject
     public RegisterViewModel(
@@ -118,17 +117,18 @@ public class RegisterViewModel extends BaseObservable {
     public void onRegisterClick() {
         if (isInputValid()) {
             setRegisterEnabled(false);
-            try {
+            //try {
                 // Save the user in DB
-                register_request_data.InsertRegisterDataToDb();
-                mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
+                //registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+                register_request_data.sendRegisterDataToEc2();
+                //mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
                 mListener.onLoginSuccess();
-            } catch (UserAlreadyExistsException e) {
+            /*} catch (UserAlreadyExistsException e) {
                 Log.d("RegisterViewModel", "Error while saving: " + e.getMessage());
                 mListener.onError("User Already Exists", "User with given mEmail already exists.");
             } finally {
                 setRegisterEnabled(true);
-            }
+            }*/
         }
     }
 
@@ -149,9 +149,7 @@ public class RegisterViewModel extends BaseObservable {
     }
 
     public interface ViewListener {
-
         void onLoginSuccess();
-
         void onError(String header, String message);
     }
 

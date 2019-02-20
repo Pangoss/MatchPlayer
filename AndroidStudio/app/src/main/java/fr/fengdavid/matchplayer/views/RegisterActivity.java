@@ -16,6 +16,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
 
+import fr.fengdavid.matchplayer.requests.registerRequest;
+
 public class RegisterActivity extends AppCompatActivity implements RegisterViewModel.ViewListener {
 
     @Inject
@@ -24,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_register
@@ -44,10 +45,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         nameEditText.setAutoValidate(true);
         passwordEditText.setAutoValidate(true);
 
-        phoneEditText.addValidator(viewModel.getPhoneValidator());
-        emailEditText.addValidator(viewModel.getEmailValidator());
+        phoneEditText.addValidator(viewModel.getmPhoneValidator());
+        emailEditText.addValidator(viewModel.getmEmailValidator());
         nameEditText.addValidator(viewModel.getmNameValidator());
-        passwordEditText.addValidator(viewModel.getPasswordValidator());
+        passwordEditText.addValidator(viewModel.getmPasswordValidator());
+
+        /*viewModel.setName(nameEditText.getText().toString());
+        viewModel.setPhone(phoneEditText.getText().toString());
+        viewModel.setEmail(emailEditText.getText().toString());
+        viewModel.setPassword(passwordEditText.getText().toString());*/
+
+        viewModel.context=this;
+
     }
 
     @Override

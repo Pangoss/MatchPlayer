@@ -1,8 +1,11 @@
 package fr.fengdavid.matchplayer.viewmodels;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import fr.fengdavid.matchplayer.entities.User;
 import fr.fengdavid.matchplayer.repositories.UserAlreadyExistsException;
@@ -11,11 +14,15 @@ import fr.fengdavid.matchplayer.validators.EmailValidator;
 import fr.fengdavid.matchplayer.validators.NameValidator;
 import fr.fengdavid.matchplayer.validators.PasswordValidator;
 import fr.fengdavid.matchplayer.validators.PhoneValidator;
+import fr.fengdavid.matchplayer.views.RegisterActivity;
+
 import com.rengwuxian.materialedittext.validation.METValidator;
 
 import javax.inject.Inject;
 
-public class RegisterViewModel extends BaseObservable{
+import fr.fengdavid.matchplayer.requests.registerRequest;
+
+public class RegisterViewModel extends BaseObservable {
 
     private String mName, mPhone, mEmail, mPassword;
     private boolean mRegisterEnabled;
@@ -26,6 +33,9 @@ public class RegisterViewModel extends BaseObservable{
     private NameValidator mNameValidator;
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
+
+     public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+    public Context context;
 
     @Inject
     public RegisterViewModel(
@@ -110,24 +120,27 @@ public class RegisterViewModel extends BaseObservable{
     public void onRegisterClick() {
         if (isInputValid()) {
             setRegisterEnabled(false);
-            // Save the user in DB
             try {
-                mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
+                // Save the user in DB
+                //registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+                register_request_data.sendRegisterDataToEc2(context,mName,mPassword,mPhone,mEmail);
+                //mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
                 mListener.onLoginSuccess();
-            } catch (UserAlreadyExistsException e) {
+            } /*catch (UserAlreadyExistsException e) {
                 Log.d("RegisterViewModel", "Error while saving: " + e.getMessage());
                 mListener.onError("User Already Exists", "User with given mEmail already exists.");
-            } finally {
+            }*/
+            finally {
                 setRegisterEnabled(true);
             }
         }
     }
 
-    public METValidator getPhoneValidator() {
+    public METValidator getmPhoneValidator() {
         return mPhoneValidator;
     }
 
-    public METValidator getEmailValidator() {
+    public METValidator getmEmailValidator() {
         return mEmailValidator;
     }
 
@@ -135,14 +148,12 @@ public class RegisterViewModel extends BaseObservable{
         return mNameValidator;
     }
 
-    public PasswordValidator getPasswordValidator() {
+    public PasswordValidator getmPasswordValidator() {
         return mPasswordValidator;
     }
 
     public interface ViewListener {
-
         void onLoginSuccess();
-
         void onError(String header, String message);
     }
 

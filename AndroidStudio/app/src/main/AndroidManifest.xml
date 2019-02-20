@@ -16,15 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".views.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.ProfileActivity"></activity>
-
+        <activity android:name=".views.ProfileActivity" />
+        <activity android:name=".views.SearchEventActivity" />
+        <activity android:name=".views.HomeActivity" />
+        <activity android:name=".views.SettingsActivity"></activity>
     </application>
 
 </manifest>

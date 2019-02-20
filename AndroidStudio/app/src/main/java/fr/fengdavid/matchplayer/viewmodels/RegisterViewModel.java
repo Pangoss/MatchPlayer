@@ -1,5 +1,6 @@
 package fr.fengdavid.matchplayer.viewmodels;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 
 import android.util.Log;
@@ -32,7 +33,9 @@ public class RegisterViewModel extends BaseObservable {
     private NameValidator mNameValidator;
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
-    public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+
+     public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+    public Context context;
 
     @Inject
     public RegisterViewModel(
@@ -117,18 +120,19 @@ public class RegisterViewModel extends BaseObservable {
     public void onRegisterClick() {
         if (isInputValid()) {
             setRegisterEnabled(false);
-            //try {
+            try {
                 // Save the user in DB
                 //registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
-                register_request_data.sendRegisterDataToEc2();
+                register_request_data.sendRegisterDataToEc2(context,mName,mPassword,mPhone,mEmail);
                 //mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
                 mListener.onLoginSuccess();
-            /*} catch (UserAlreadyExistsException e) {
+            } /*catch (UserAlreadyExistsException e) {
                 Log.d("RegisterViewModel", "Error while saving: " + e.getMessage());
                 mListener.onError("User Already Exists", "User with given mEmail already exists.");
-            } finally {
-                setRegisterEnabled(true);
             }*/
+            finally {
+                setRegisterEnabled(true);
+            }
         }
     }
 

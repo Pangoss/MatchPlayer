@@ -50,7 +50,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         nameEditText.addValidator(viewModel.getmNameValidator());
         passwordEditText.addValidator(viewModel.getmPasswordValidator());
 
-        viewModel.register_request_data.mContext=this;
+        /*viewModel.setName(nameEditText.getText().toString());
+        viewModel.setPhone(phoneEditText.getText().toString());
+        viewModel.setEmail(emailEditText.getText().toString());
+        viewModel.setPassword(passwordEditText.getText().toString());*/
+
+        viewModel.context=this;
+
     }
 
     @Override

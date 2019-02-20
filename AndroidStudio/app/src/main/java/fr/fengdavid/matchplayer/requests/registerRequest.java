@@ -40,7 +40,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class registerRequest extends AppCompatActivity {
+public class registerRequest {
 
     private String URL_POST = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/register";
 
@@ -52,13 +52,6 @@ public class registerRequest extends AppCompatActivity {
             "\"email\":" + "\"" + RequestRegisterEmail + "\","+
             "\"phonenumber\":" + "\"" + RequestRegisterPhone + "\""+
             "}";
-    public Context mContext;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     public registerRequest(String RegisterName, String RegisterPassword, String RegisterPhone, String RegisterEmail) {
         this.RequestRegisterName = RegisterName;
@@ -67,7 +60,7 @@ public class registerRequest extends AppCompatActivity {
         this.RequestRegisterEmail = RegisterEmail;
     }
 
-    public void sendRegisterDataToEc2() {
+    public void sendRegisterDataToEc2(Context mContext,String Name, String Password, String Phone, String Email) {
         // Create a trust manager that does not validate certificate chains
         /*TrustManager[] trustAllCerts = new TrustManager[]{
             new X509TrustManager() {
@@ -112,14 +105,18 @@ public class registerRequest extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(mContext);
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("name", RequestRegisterName);
+            /*jsonBody.put("name", RequestRegisterName);
             jsonBody.put("password", RequestRegisterPassword);
             jsonBody.put("email", RequestRegisterEmail);
-            jsonBody.put("phonenumber", RequestRegisterPhone);
+            jsonBody.put("phonenumber", RequestRegisterPhone);*/
             /*jsonBody.put("name", "oktest");
             jsonBody.put("password", "oktest");
             jsonBody.put("email", "oktest@gmail.com");
             jsonBody.put("phonenumber", "0664525252");*/
+            jsonBody.put("name", Name);
+            jsonBody.put("password", Password);
+            jsonBody.put("email", Email);
+            jsonBody.put("phonenumber", Phone);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import fr.fengdavid.matchplayer.R;
 import fr.fengdavid.matchplayer.databinding.ActivityRegisterBinding;
@@ -15,8 +14,6 @@ import fr.fengdavid.matchplayer.viewmodels.RegisterViewModel;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
-
-import fr.fengdavid.matchplayer.requests.registerRequest;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterViewModel.ViewListener {
 
@@ -49,11 +46,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         emailEditText.addValidator(viewModel.getmEmailValidator());
         nameEditText.addValidator(viewModel.getmNameValidator());
         passwordEditText.addValidator(viewModel.getmPasswordValidator());
-
-        /*viewModel.setName(nameEditText.getText().toString());
-        viewModel.setPhone(phoneEditText.getText().toString());
-        viewModel.setEmail(emailEditText.getText().toString());
-        viewModel.setPassword(passwordEditText.getText().toString());*/
 
         viewModel.context=this;
 

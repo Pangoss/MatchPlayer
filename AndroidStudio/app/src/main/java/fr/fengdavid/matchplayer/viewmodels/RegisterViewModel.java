@@ -3,10 +3,6 @@ package fr.fengdavid.matchplayer.viewmodels;
 import android.content.Context;
 import android.databinding.BaseObservable;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import fr.fengdavid.matchplayer.entities.User;
 import fr.fengdavid.matchplayer.repositories.UserAlreadyExistsException;
 import fr.fengdavid.matchplayer.repositories.UserRepository;
@@ -14,7 +10,7 @@ import fr.fengdavid.matchplayer.validators.EmailValidator;
 import fr.fengdavid.matchplayer.validators.NameValidator;
 import fr.fengdavid.matchplayer.validators.PasswordValidator;
 import fr.fengdavid.matchplayer.validators.PhoneValidator;
-import fr.fengdavid.matchplayer.views.RegisterActivity;
+
 
 import com.rengwuxian.materialedittext.validation.METValidator;
 
@@ -122,7 +118,6 @@ public class RegisterViewModel extends BaseObservable {
             setRegisterEnabled(false);
             try {
                 // Save the user in DB
-                //registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
                 register_request_data.sendRegisterDataToEc2(context,mName,mPassword,mPhone,mEmail);
                 //mUserRepository.save(new User(mEmail, mName, mPhone, mPassword));
                 mListener.onLoginSuccess();

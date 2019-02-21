@@ -47,25 +47,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:isIndicator="true"
         android:numStars="5"
         android:rating="4"
         android:theme="@android:style/Widget.DeviceDefault.Light.RatingBar"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
-
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:onClick="onSetIcon"
-        app:layout_constraintStart_toEndOf="@+id/tv_nickname"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sport_basket" />
 
     <TextView
         android:id="@+id/tv_nextevents"

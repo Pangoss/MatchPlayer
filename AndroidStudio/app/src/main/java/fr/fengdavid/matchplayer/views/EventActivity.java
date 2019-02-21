@@ -77,7 +77,7 @@ public class EventActivity extends AppCompatActivity {
 
     private void joinEvent() {
 
-        String URL = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/events/create";
+        String URL = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/update/join";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -94,11 +94,10 @@ public class EventActivity extends AppCompatActivity {
             @Override
             protected java.util.Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
-
                 String id = String.valueOf(event.getId());
 
                 params.put("id_event", id);
-                params.put("id_event", "0");
+                params.put("id_user", "1");
 
 
                 return params;

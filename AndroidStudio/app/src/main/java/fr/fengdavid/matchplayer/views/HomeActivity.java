@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,6 +26,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -32,6 +35,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.fengdavid.matchplayer.R;
 import fr.fengdavid.matchplayer.adapters.EventsAdapter;
@@ -49,6 +54,8 @@ public class HomeActivity extends AppCompatActivity {
     private ListView lvEvents;
     private EventsAdapter eventsAdapter;
 
+    private Map<String,String> params;
+
 
 
     RequestQueue queue;
@@ -62,8 +69,9 @@ public class HomeActivity extends AppCompatActivity {
 
         lvEvents = findViewById(R.id.lv_myevents);
 
+        lEvents = new ArrayList<Event>();
 
-       // isEvent();
+        isEvent();
 
         BottomNavigationView nav =  findViewById(R.id.nav_btn);
 
@@ -79,8 +87,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+
+
     }
     private void isEvent() {
+        
         getMyEvents();
         if(!lEvents.isEmpty()){
             eventsAdapter = new EventsAdapter(this, lEvents);
@@ -115,14 +126,52 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getMyEvents () {
 
-        JSONObject jsonID = new JSONObject();
-        try {
-            jsonID.put("id", 0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final String id = jsonID.toString();
-        String url = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/event_by_id";
+        String URL = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/event_by_id";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Event event;
+                JSONObject jsonEvent;
+                lEvents.clear();
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        jsonEvent = response.getJSONObject(i);
+                        String name = jsonEvent.getString("event_name");
+                        String sport = jsonEvent.getString("sport");
+                        String place = jsonEvent.getString("street_name") + ", " + jsonEvent.getString("street_number");
+                        String date = jsonEvent.getString("date");
+                        int nPlayers = jsonEvent.getInt("attending_number");
+                        int maxPlayers = jsonEvent.getInt("attending_number_max");
+                        int id = jsonEvent.getInt("event_id");
+
+                        event = new Event(name, sport, place, date, nPlayers, maxPlayers, id);
+                        lEvents.add(event);
+                    }
+                }catch (JSONException e) {
+                    Toast.makeText(getApplication(),e.toString(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener () {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+                @Override
+                protected java.util.Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+
+                params.put("id", "0");
+
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
 
 
 

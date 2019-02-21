@@ -45,14 +45,12 @@ import fr.fengdavid.matchplayer.structs.Event;
 
 public class SearchEventActivity extends AppCompatActivity {
 
-    private int nEvents;
     private ArrayList<Event> lEvents;
 
     private ListView lvEvents;
     private EventsAdapter eventsAdapter;
-    int event_id;
 
-    RequestQueue queue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +60,6 @@ public class SearchEventActivity extends AppCompatActivity {
         lEvents = new ArrayList<Event>();
 
         lvEvents = findViewById(R.id.lv_events);
-
-        queue = Volley.newRequestQueue(this);
 
         Button btn_search = findViewById(R.id.btn_search);
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +79,7 @@ public class SearchEventActivity extends AppCompatActivity {
         });
 
         Spinner spinner = (Spinner) findViewById(R.id.sp_sortby);
-        String[] values = {"Name","Date","Sport","Place"};
+        String[] values = {"Creation date"};
         spinner.setAdapter(new ArrayAdapter<String>(this, R.layout.my_spinner, values));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -115,8 +111,7 @@ public class SearchEventActivity extends AppCompatActivity {
                             break;
 
                         case R.id.nav_home:
-                            Intent events = new Intent(SearchEventActivity.this, HomeActivity.class);
-                            startActivity(events);
+                            finish();
                             break;
 
                         case R.id.nav_search_event:
@@ -144,10 +139,10 @@ public class SearchEventActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         Event event;
                         JSONObject jsonEvent;
-                        nEvents = response.length();
                         lEvents.clear();
+                        Log.d("Array: ", String.valueOf(response.length()));
                             try {
-                                for(int i=0; i< nEvents;i++){
+                                for(int i=0; i<response.length();i++){
                                     jsonEvent = response.getJSONObject(i);
                                     String name = jsonEvent.getString("event_name");
                                     String sport = jsonEvent.getString("sport");
@@ -156,13 +151,13 @@ public class SearchEventActivity extends AppCompatActivity {
                                     int nPlayers = jsonEvent.getInt("attending_number");
                                     int maxPlayers = jsonEvent.getInt("attending_number_max");
                                     int id = jsonEvent.getInt("event_id");
-
+                                    Log.d("Array: ", String.valueOf(i));
                                     event = new Event(name, sport, place, date, nPlayers, maxPlayers, id);
                                     lEvents.add(event);
                                 }
 
                             } catch (JSONException e) {
-                                Toast.makeText(getApplication(),e.toString(),Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
 
                     }
@@ -170,9 +165,10 @@ public class SearchEventActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        Toast.makeText(getApplication(),error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 });
+        RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jsonArrayRequest);
 
     }

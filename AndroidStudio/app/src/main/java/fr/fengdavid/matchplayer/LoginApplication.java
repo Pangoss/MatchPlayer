@@ -9,6 +9,8 @@ import io.realm.Realm;
 public class LoginApplication extends Application {
 
     AppComponent mAppComponent;
+    private String token;
+    private int id;
 
     @Override
     public void onCreate() {
@@ -21,4 +23,18 @@ public class LoginApplication extends Application {
         return mAppComponent;
     }
 
+    public void setId(int ID){
+        this.id = ID;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
 }

@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
 
     public void onLoginSuccess() {
         // Handle successful login
-        Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
+        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
         i.putExtra("email", viewModel.getEmail());
         startActivity(i);
     }

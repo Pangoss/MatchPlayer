@@ -39,15 +39,22 @@ public class ProfileActivity extends AppCompatActivity implements ProfileViewMod
         MaterialEditText phoneEditText = binding.etPhoneUpdate;
         MaterialEditText emailEditText = binding.etEmailUpdate;
         MaterialEditText nameEditText = binding.etNameUpdate;
+        MaterialEditText passwordEditText = binding.etPasswordUpdate;
+        MaterialEditText surnameEditText = binding.etSurnameUpdate;
 
         mLlParent = binding.llUpdateParent;
 
         phoneEditText.setAutoValidate(true);
         emailEditText.setAutoValidate(true);
         nameEditText.setAutoValidate(true);
+        passwordEditText.setAutoValidate(true);
+        surnameEditText.setAutoValidate(true);
 
-        phoneEditText.addValidator(viewModel.getPhoneValidator());
+        phoneEditText.addValidator(viewModel.getmPhoneValidator());
         nameEditText.addValidator(viewModel.getmNameValidator());
+        passwordEditText.addValidator(viewModel.getmPasswordValidator());
+
+        viewModel.context = this;
     }
 
     @Override

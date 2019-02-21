@@ -15,6 +15,7 @@ import com.rengwuxian.materialedittext.validation.METValidator;
 import javax.inject.Inject;
 
 import fr.fengdavid.matchplayer.requests.loginRequest;
+import fr.fengdavid.matchplayer.LoginApplication;
 
 public class LoginViewModel extends BaseObservable{
 
@@ -31,6 +32,7 @@ public class LoginViewModel extends BaseObservable{
     public loginRequest loginRequest = new loginRequest(mEmail,mPassword);
     public Context context;
 
+    //LoginApplication loginApplication = (LoginApplication) context;
     @Inject
     public LoginViewModel(
             EmailValidator emailValidator,
@@ -118,9 +120,8 @@ public class LoginViewModel extends BaseObservable{
                 user.settoken(mToken);
                 Log.i("mAuth ",mAuth);
                 // pass token and id in global variable
-                LoginApplication loginApplication = (LoginApplication) context;
-                loginApplication.setToken(mToken);
-                loginApplication.setId(mId);
+                //loginApplication.setToken(mToken);
+                //loginApplication.setId(mId);
                 if(mAuth.equals("true")){
                     mListener.onLoginSuccess();
                 }else{

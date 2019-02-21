@@ -8,10 +8,14 @@
             type="fr.fengdavid.matchplayer.viewmodels.ProfileViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/llUpdateParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
@@ -78,7 +82,7 @@
                 app:met_iconLeft="@drawable/ic_short_text_white_24dp"
                 app:met_primaryColor="@color/colorAccent" />
 
-            <!--<com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/et_surname_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +110,7 @@
                 app:met_iconLeft="@drawable/ic_password_white_24dp"
                 app:met_primaryColor="@color/colorAccent" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <!--<com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/et_gender_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,4 +138,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 </layout>

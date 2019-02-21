@@ -65,7 +65,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setEmail(String email) {
         this.mEmail = email;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getSurname() {
@@ -74,7 +74,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setSurname(String surname) {
         this.mSurname = surname;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getGender() {
@@ -83,7 +83,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setGender(String gender) {
         this.mGender = gender;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getPassword() {
@@ -92,7 +92,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setPassword(String password) {
         this.mPassword = password;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getStreet_number() {
@@ -101,7 +101,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setStreet_number(String street_number) {
         this.mStreet_number = street_number;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getStreet_name() {
@@ -110,7 +110,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setStreet_name(String street_name) {
         this.mStreet_name = street_name;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getCity() {
@@ -119,7 +119,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setCity(String city) {
         this.mCity = city;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getZIP_postcode() {
@@ -128,7 +128,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setZIP_postcode(String zip_postcode) {
         this.mZIP_postcode = zip_postcode;
-        updateDetails();
+        //updateDetails();
     }
 
     public String getCountry() {
@@ -137,7 +137,7 @@ public class ProfileViewModel extends BaseObservable{
 
     public void setCountry(String country) {
         this.mCountry = country;
-        updateDetails();
+        //updateDetails();
     }
 
     private void updateDetails() {
@@ -169,10 +169,10 @@ public class ProfileViewModel extends BaseObservable{
             setUpdateEnabled(false);
             // Update the user in DB
             try {
-                User user = mUserRepository.fetchByEmail(mEmail);
+                /*User user = mUserRepository.fetchByEmail(mEmail);
                 user.setName(mName);
                 user.setPhone(mPhone);
-                mUserRepository.update(user);
+                mUserRepository.update(user);*/
                 mListener.onMessage("Profile details updated.");
             } catch (Exception e) {
                 Log.d("UpdateViewModel", "Error while updating user: " + e.getMessage());

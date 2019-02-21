@@ -28,7 +28,7 @@ public class loginRequest {
     public String LoginPassword, LoginEmail;
     private RequestQueue requestQueue;
 
-    public String auth="false";
+    public String auth="";
     public String token;
     public int Id;
 

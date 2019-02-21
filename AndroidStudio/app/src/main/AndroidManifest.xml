@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".LoginApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -25,10 +26,6 @@
             android:name=".views.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".views.ProfileActivity" />
-        <activity
-            android:name=".views.HomeActivityExample"
-            android:label="@string/title_activity_home_example"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

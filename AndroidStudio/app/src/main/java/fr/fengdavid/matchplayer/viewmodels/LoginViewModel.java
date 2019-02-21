@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.util.Log;
 
+import fr.fengdavid.matchplayer.LoginApplication;
 import fr.fengdavid.matchplayer.entities.User;
 import fr.fengdavid.matchplayer.repositories.UserRepository;
 import fr.fengdavid.matchplayer.validators.EmailValidator;
@@ -116,6 +117,10 @@ public class LoginViewModel extends BaseObservable{
                 mToken = loginRequest.getToken();
                 user.settoken(mToken);
                 Log.i("mAuth ",mAuth);
+                // pass token and id in global variable
+                LoginApplication loginApplication = (LoginApplication) context;
+                loginApplication.setToken(mToken);
+                loginApplication.setId(mId);
                 if(mAuth.equals("true")){
                     mListener.onLoginSuccess();
                 }else{

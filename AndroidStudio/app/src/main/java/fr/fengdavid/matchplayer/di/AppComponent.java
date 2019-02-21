@@ -17,5 +17,4 @@ public interface AppComponent {
     void inject(LoginActivity loginActivity);
     void inject(ForgotPasswordActivity forgotPasswordActivity);
     void inject(ProfileActivity profileActivity);
-
 }

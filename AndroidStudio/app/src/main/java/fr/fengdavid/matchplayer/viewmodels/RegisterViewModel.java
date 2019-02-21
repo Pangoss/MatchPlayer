@@ -30,7 +30,7 @@ public class RegisterViewModel extends BaseObservable {
     private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
 
-     public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
+    public registerRequest register_request_data = new registerRequest(mName,mPassword,mPhone,mEmail);
     public Context context;
 
     @Inject

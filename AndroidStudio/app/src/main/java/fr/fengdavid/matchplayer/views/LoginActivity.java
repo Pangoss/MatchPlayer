@@ -55,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
         emailEditText.addValidator(viewModel.getEmailValidator());
         passwordEditText.addValidator(viewModel.getPasswordValidator());
 
+        viewModel.context = this;
+
         // Register button
         Button btnRegister = findViewById(R.id.btn_create);
         // Action Register button clicked
@@ -74,12 +76,11 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
                 startActivity(i);
             }
         });
-
     }
 
     public void onLoginSuccess() {
         // Handle successful login
-        Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
+        Intent i = new Intent(LoginActivity.this, HomeActivityExample.class);
         i.putExtra("email", viewModel.getEmail());
         startActivity(i);
     }

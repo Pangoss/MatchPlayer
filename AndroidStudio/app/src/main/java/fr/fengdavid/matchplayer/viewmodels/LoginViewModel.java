@@ -1,5 +1,6 @@
 package fr.fengdavid.matchplayer.viewmodels;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.util.Log;
 
@@ -13,6 +14,8 @@ import com.rengwuxian.materialedittext.validation.METValidator;
 
 import javax.inject.Inject;
 
+import fr.fengdavid.matchplayer.requests.loginRequest;
+
 public class LoginViewModel extends BaseObservable{
 
     private String mEmail, mPassword;
@@ -22,6 +25,9 @@ public class LoginViewModel extends BaseObservable{
     private PasswordValidator mPasswordValidator;
 
     private UserRepository mUserRepository;
+
+    public loginRequest loginRequest = new loginRequest(mEmail,mPassword);
+    public Context context;
 
     @Inject
     public LoginViewModel(
@@ -78,7 +84,7 @@ public class LoginViewModel extends BaseObservable{
         if (isInputValid()) {
             setLoginEnabled(false);
             try {
-                User user = mUserRepository.fetchByEmail(mEmail);
+                /*User user = mUserRepository.fetchByEmail(mEmail);
                 if (user != null && user.getEmail().equals(mEmail)) {
                     // User exists in local DB, check for password
                     if (user.getPassword().equals(mPassword)) {
@@ -91,6 +97,14 @@ public class LoginViewModel extends BaseObservable{
                 } else {
                     // User not found
                     mListener.onMessage("Email not Registered. Please Register first.");
+                }*/
+                loginRequest.sendLoginDataToEc2(context,mEmail,mPassword);
+                Log.i("Auth ",loginRequest.getAuth());
+                if(loginRequest.auth.equals("true")){
+                    mListener.onLoginSuccess();
+                }else{
+                    Log.i("Auth ",loginRequest.getAuth());
+                    Log.i("Auth ","FAILED");
                 }
             } catch (Exception e) {
                 Log.d("LoginViewModel", "Error while saving: " + e.getMessage());

@@ -82,7 +82,7 @@ public class ForgotPasswordViewModel extends BaseObservable {
                             String res = ElasticEmailClient.send(
                                     "davidyuhui.feng01@universitadipavia.it",
                                     "6da17997-91f2-4d62-a489-55e2c9aa7435",
-                                    "support@loginapp.com",
+                                    "support@matchplayer.com",
                                     "LoginApp support team",
                                     "Your Login App Password reset",
                                     "Your password is: " + newPassword,

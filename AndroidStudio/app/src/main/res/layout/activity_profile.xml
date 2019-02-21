@@ -8,10 +8,14 @@
             type="fr.fengdavid.matchplayer.viewmodels.ProfileViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/llUpdateParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
@@ -21,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="78dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/manage_profile"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -78,6 +82,47 @@
                 app:met_iconLeft="@drawable/ic_short_text_white_24dp"
                 app:met_primaryColor="@color/colorAccent" />
 
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_surname_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:hint="@string/your_surname"
+                android:text="@={viewModel.surname}"
+                app:met_baseColor="@color/white"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="16sp"
+                app:met_iconLeft="@drawable/ic_short_text_white_24dp"
+                app:met_primaryColor="@color/colorAccent" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_password_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:hint="@string/your_password"
+                android:text="@={viewModel.password}"
+                app:met_baseColor="@color/white"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="16sp"
+                app:met_iconLeft="@drawable/ic_password_white_24dp"
+                app:met_primaryColor="@color/colorAccent" />
+
+            <!--<com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_gender_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:hint="@string/your_gender"
+                android:text="@={viewModel.gender}"
+                app:met_baseColor="@color/white"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="16sp"
+                app:met_iconLeft="@drawable/ic_short_text_white_24dp"
+                app:met_primaryColor="@color/colorAccent" />-->
 
             <Button
                 android:id="@+id/btn_register"
@@ -93,4 +138,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 </layout>

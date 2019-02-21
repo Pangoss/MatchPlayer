@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import fr.fengdavid.matchplayer.R;
 import fr.fengdavid.matchplayer.databinding.ActivityRegisterBinding;
@@ -24,7 +23,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_register
@@ -44,10 +42,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         nameEditText.setAutoValidate(true);
         passwordEditText.setAutoValidate(true);
 
-        phoneEditText.addValidator(viewModel.getPhoneValidator());
-        emailEditText.addValidator(viewModel.getEmailValidator());
+        phoneEditText.addValidator(viewModel.getmPhoneValidator());
+        emailEditText.addValidator(viewModel.getmEmailValidator());
         nameEditText.addValidator(viewModel.getmNameValidator());
-        passwordEditText.addValidator(viewModel.getPasswordValidator());
+        passwordEditText.addValidator(viewModel.getmPasswordValidator());
+
+        viewModel.context=this;
+
     }
 
     @Override

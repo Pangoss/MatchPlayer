@@ -11,6 +11,8 @@ var router = express.Router();
 //ROUTING
 var userRouter = require('./routes/users');
 var indexRouter = require('./routes/index');
+var eventRouter = require('./routes/events');
+app.use('/events', eventRouter);
 app.use('/', indexRouter);
 app.use(`/users`, userRouter);
 

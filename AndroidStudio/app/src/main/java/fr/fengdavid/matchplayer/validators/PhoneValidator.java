@@ -13,7 +13,6 @@ public class PhoneValidator extends METValidator {
     @Override
     public boolean isValid(@NonNull CharSequence text, boolean isEmpty) {
         // Ideally phone numbers should be validated via Google phonelib library.
-        // This is just for demo purpose.
         String regex = "[^\\d]";
         String PhoneDigits = text.toString().replaceAll(regex, "");
         return (!isEmpty && PhoneDigits.length() >= 10);

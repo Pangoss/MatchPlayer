@@ -13,6 +13,7 @@ import dagger.Provides;
 @Module
 public class ValidatorModule {
 
+    // sentences returned when the validator is wrong
     @Provides
     @Singleton
     PhoneValidator providePhoneValidator() {

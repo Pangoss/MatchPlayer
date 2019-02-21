@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import fr.fengdavid.matchplayer.R;
 import fr.fengdavid.matchplayer.databinding.ActivityRegisterBinding;
@@ -33,10 +34,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
         viewModel.setErrorListener(this);
         binding.setViewModel(viewModel);
 
-        MaterialEditText phoneEditText = binding.registerPhone;
-        MaterialEditText emailEditText = binding.registerEmail;
-        MaterialEditText nameEditText = binding.registerName;
-        MaterialEditText passwordEditText = binding.registerPassword;
+        MaterialEditText phoneEditText = binding.etRegisterPhone;
+        MaterialEditText emailEditText = binding.etRegisterEmail;
+        MaterialEditText nameEditText = binding.etRegisterName;
+        MaterialEditText passwordEditText = binding.etRegisterPassword;
 
         phoneEditText.setAutoValidate(true);
         emailEditText.setAutoValidate(true);

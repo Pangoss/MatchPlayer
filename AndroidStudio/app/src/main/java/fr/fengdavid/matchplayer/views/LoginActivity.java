@@ -55,7 +55,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
         emailEditText.addValidator(viewModel.getEmailValidator());
         passwordEditText.addValidator(viewModel.getPasswordValidator());
 
+        // Register button
         Button btnRegister = findViewById(R.id.btn_create);
+        // Action Register button clicked
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -63,7 +65,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModel.V
             }
         });
 
+        // Forgot password button
         TextView tvPasswordForgot = findViewById(R.id.tv_password_forgot);
+        // Action Forgot password button clicked
         tvPasswordForgot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, ForgotPasswordActivity.class); //change

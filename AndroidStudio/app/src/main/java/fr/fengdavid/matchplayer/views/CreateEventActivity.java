@@ -1,10 +1,9 @@
 package fr.fengdavid.matchplayer.views;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,59 +22,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.fengdavid.matchplayer.R;
-import fr.fengdavid.matchplayer.structs.Event;
 
-public class EventActivity extends AppCompatActivity {
-
-    private Event event;
+public class CreateEventActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_create_event);
 
-        showEvent();
 
-        Button btn_join = findViewById(R.id.btn_join_event);
-        btn_join.setOnClickListener(new View.OnClickListener() {
+        Spinner spinner = (Spinner) findViewById(R.id.sp_sports);
+        String[] values = {"football","basketball","tennis","baseball", "rugby"};
+        spinner.setAdapter(new ArrayAdapter<String>(this, R.layout.my_spinner, values));
+
+        Button btn_create = findViewById(R.id.btn_create_event);
+        btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(event.getnPlayers()<event.getMaxPlayers()) {
-                    joinEvent();
-                }else {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Players limit reached";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
+                createEvent();
             }
         });
-
-
     }
 
-    private void showEvent() {
-        Bundle data = getIntent().getExtras();
-        event =(Event) data.getParcelable("event");
-
-        TextView tv_name = findViewById(R.id.tv_name_ev);
-        TextView tv_sport = findViewById(R.id.tv_sport_ev);
-        TextView tv_place = findViewById(R.id.tv_place_ev);
-        TextView tv_date = findViewById(R.id.tv_date_ev);
-        TextView tv_hour = findViewById(R.id.tv_hour_ev);
-        TextView tv_players = findViewById(R.id.tv_players_ev);
-
-        tv_name.append(event.getName());
-        tv_sport.append(event.getSport());
-        tv_place.append(event.getPlace());
-        tv_date.append(event.getDate().substring(0, 10));
-        tv_hour.append(event.getDate().substring(11,16));
-        tv_players.append(event.getnPlayers() + "/" + event.getMaxPlayers());
-    }
-
-    private void joinEvent() {
+    private void createEvent() {
 
         String URL = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/events/create";
 
@@ -95,10 +64,25 @@ public class EventActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
 
-                String id = String.valueOf(event.getId());
+                EditText et_name = findViewById(R.id.et_name);
+                Spinner sp_sport = findViewById(R.id.sp_sports);
+                EditText et_place = findViewById(R.id.et_place);
+                EditText et_date = findViewById(R.id.et_date);
+                EditText et_players = findViewById(R.id.et_players);
 
-                params.put("id_event", id);
-                params.put("id_event", "0");
+                String name = et_name.getText().toString();
+                TextView tv_sport = (TextView) sp_sport.getSelectedView();
+                String sport= tv_sport.getText().toString();
+                String place = et_place.getText().toString();
+                String date= et_date.getText().toString();
+                String maxPlayers = et_players.getText().toString();
+
+                params.put("event_name", name);
+                params.put("sport", sport);
+                params.put("street_number", place.substring(place.lastIndexOf(",")));
+                params.put("street_name", place.substring(0,place.lastIndexOf(",")));
+                params.put("date", date);
+                params.put("attending_number_max", maxPlayers);
 
 
                 return params;
@@ -107,6 +91,4 @@ public class EventActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
-
 }

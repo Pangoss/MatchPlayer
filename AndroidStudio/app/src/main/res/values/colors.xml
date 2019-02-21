@@ -5,7 +5,7 @@
     <color name="colorPrimaryLight">#3ccaff</color>
     <color name="colorAccent">#ffffff</color>
     <color name="textDark">#242320</color>
-    <color name="textLight">#fff</color>
+    <color name="textLight">#ffffff</color>
     <color name="white">#fff</color>
     <color name="lightGrey">#d3d3d3</color>
 </resources>

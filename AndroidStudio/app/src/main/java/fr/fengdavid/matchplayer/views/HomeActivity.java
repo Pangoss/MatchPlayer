@@ -1,16 +1,40 @@
 package fr.fengdavid.matchplayer.views;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import fr.fengdavid.matchplayer.R;
+import fr.fengdavid.matchplayer.adapters.EventsAdapter;
 import fr.fengdavid.matchplayer.structs.Event;
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,28 +42,53 @@ public class HomeActivity extends AppCompatActivity {
     private String username;
     private String sport;
     private int level;
-    private int nEvents = 0;
+    private boolean isEvent;
+    private int nEvents;
+    private ArrayList<Event> lEvents;
     private Event event;
+    private ListView lvEvents;
+    private EventsAdapter eventsAdapter;
+
+
+
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button btn_setting = findViewById(R.id.btn_settings);
-        btn_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(i);
-            }
-        });
+        queue = Volley.newRequestQueue(this);
+
+        lvEvents = findViewById(R.id.lv_myevents);
+
+
+       // isEvent();
 
         BottomNavigationView nav =  findViewById(R.id.nav_btn);
 
         nav.setOnNavigationItemSelectedListener(navListener);
 
+        FloatingActionButton btn_create = findViewById(R.id.btn_create);
+        btn_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, CreateEventActivity.class);
+                startActivity(i);
+            }
+        });
 
+
+    }
+    private void isEvent() {
+        getMyEvents();
+        if(!lEvents.isEmpty()){
+            eventsAdapter = new EventsAdapter(this, lEvents);
+            lvEvents.setAdapter(eventsAdapter);
+        } else {
+            TextView tv_noevent = findViewById(R.id.tv_noevents);
+            tv_noevent.setCursorVisible(true);
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -52,9 +101,7 @@ public class HomeActivity extends AppCompatActivity {
                             startActivity(edit);
                         break;
 
-                        case R.id.nav_events:
-                            Intent events = new Intent(HomeActivity.this, EventActivity.class);
-                            startActivity(events);
+                        case R.id.nav_home:
                             break;
 
                         case R.id.nav_search_event:
@@ -66,39 +113,18 @@ public class HomeActivity extends AppCompatActivity {
                 }
             };
 
-    //Test icons
-    public void onSetIcon (View view) {
+    private void getMyEvents () {
 
-        ImageView icon = findViewById(R.id.iv_icon);
-        if(nEvents<4) {
-            nEvents++;
-        } else nEvents = 0;
-
-        RatingBar rb = findViewById(R.id.rb_level);
-        rb.setRating(nEvents+1);
-
-
-        switch (nEvents) {
-            case 0:
-                icon.setImageResource(R.drawable.ic_sport_basket);
-                break;
-
-            case 1:
-                icon.setImageResource(R.drawable.ic_sport_baseball);
-                break;
-
-            case 2:
-                icon.setImageResource(R.drawable.ic_sport_football);
-                break;
-
-            case 3:
-                icon.setImageResource(R.drawable.ic_sport_rugby);
-                break;
-
-            case 4:
-                icon.setImageResource(R.drawable.ic_sport_tennis);
-                break;
+        JSONObject jsonID = new JSONObject();
+        try {
+            jsonID.put("id", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        final String id = jsonID.toString();
+        String url = "http://ec2-100-27-21-188.compute-1.amazonaws.com:9000/users/event_by_id";
+
+
 
     }
 

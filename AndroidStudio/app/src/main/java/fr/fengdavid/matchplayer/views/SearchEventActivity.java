@@ -1,12 +1,18 @@
 package fr.fengdavid.matchplayer.views;
 
 import android.annotation.TargetApi;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +50,7 @@ public class SearchEventActivity extends AppCompatActivity {
 
     private ListView lvEvents;
     private EventsAdapter eventsAdapter;
+    int event_id;
 
     RequestQueue queue;
 
@@ -52,7 +61,7 @@ public class SearchEventActivity extends AppCompatActivity {
 
         lEvents = new ArrayList<Event>();
 
-        lvEvents = findViewById(R.id.lvEvents);
+        lvEvents = findViewById(R.id.lv_events);
 
         queue = Volley.newRequestQueue(this);
 
@@ -61,6 +70,15 @@ public class SearchEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 searchEvents();
+            }
+        });
+        lvEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(SearchEventActivity.this, EventActivity.class);
+                Event event = (Event) eventsAdapter.getItem(position);
+                i.putExtra("event", event);
+                startActivity(i);
             }
         });
 
@@ -80,14 +98,39 @@ public class SearchEventActivity extends AppCompatActivity {
             }
 
         });
+
+        BottomNavigationView nav =  findViewById(R.id.nav_btn);
+
+        nav.setOnNavigationItemSelectedListener(navListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_edit_profile:
+                            Intent edit = new Intent(SearchEventActivity.this, ProfileActivity.class);
+                            startActivity(edit);
+                            break;
+
+                        case R.id.nav_home:
+                            Intent events = new Intent(SearchEventActivity.this, HomeActivity.class);
+                            startActivity(events);
+                            break;
+
+                        case R.id.nav_search_event:
+                            break;
+                    }
+                    return false;
+                }
+            };
 
     private void searchEvents() {
 
         getEvents();
         eventsAdapter = new EventsAdapter(this, lEvents);
         lvEvents.setAdapter(eventsAdapter);
-
 
     }
 
@@ -97,7 +140,6 @@ public class SearchEventActivity extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
-                    @TargetApi(Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(JSONArray response) {
                         Event event;
@@ -113,13 +155,14 @@ public class SearchEventActivity extends AppCompatActivity {
                                     String date = jsonEvent.getString("date");
                                     int nPlayers = jsonEvent.getInt("attending_number");
                                     int maxPlayers = jsonEvent.getInt("attending_number_max");
+                                    int id = jsonEvent.getInt("event_id");
 
-                                    event = new Event(name, sport, place, date, nPlayers, maxPlayers);
+                                    event = new Event(name, sport, place, date, nPlayers, maxPlayers, id);
                                     lEvents.add(event);
                                 }
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                Toast.makeText(getApplication(),e.toString(),Toast.LENGTH_SHORT).show();
                             }
 
                     }

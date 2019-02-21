@@ -1,0 +1,17 @@
+var jwt = require('jsonwebtoken');
+var config = require('../config');
+
+
+
+function tokenStatus(token) {
+  var status
+
+  if (!token) status=1;  //NO TOKEN
+  
+  jwt.verify(token, config.secret)
+	.then(function(payload){ return 0 })
+	.catch(function(err){return 2})
+};  
+ 
+module.exports = {
+    tokenStatus: tokenStatus, }

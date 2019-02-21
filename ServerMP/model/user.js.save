@@ -13,6 +13,8 @@ let definition = {
 
 	name: {
  		type: Sequelize.STRING,
+                unique: true,
+
 		},
  
 

@@ -15,6 +15,7 @@ import javax.inject.Inject;
 public class ProfileViewModel extends BaseObservable{
 
     private String mName, mPhone, mEmail;
+    private String mSurname, mGender, mPassword, mStreet_number,mStreet_name, mCity, mZIP_postcode, mCountry;
     private boolean mUpdateEnabled;
     private ViewListener mListener;
 
@@ -60,12 +61,83 @@ public class ProfileViewModel extends BaseObservable{
 
     public String getEmail() {
         return mEmail;
-
     }
 
     public void setEmail(String email) {
         this.mEmail = email;
-        updateDetails();
+        //updateDetails();
+    }
+
+    public String getSurname() {
+        return mSurname;
+    }
+
+    public void setSurname(String surname) {
+        this.mSurname = surname;
+        //updateDetails();
+    }
+
+    public String getGender() {
+        return mGender;
+    }
+
+    public void setGender(String gender) {
+        this.mGender = gender;
+        //updateDetails();
+    }
+
+    public String getPassword() {
+        return mPassword;
+    }
+
+    public void setPassword(String password) {
+        this.mPassword = password;
+        //updateDetails();
+    }
+
+    public String getStreet_number() {
+        return mStreet_number;
+    }
+
+    public void setStreet_number(String street_number) {
+        this.mStreet_number = street_number;
+        //updateDetails();
+    }
+
+    public String getStreet_name() {
+        return mStreet_name;
+    }
+
+    public void setStreet_name(String street_name) {
+        this.mStreet_name = street_name;
+        //updateDetails();
+    }
+
+    public String getCity() {
+        return mCity;
+    }
+
+    public void setCity(String city) {
+        this.mCity = city;
+        //updateDetails();
+    }
+
+    public String getZIP_postcode() {
+        return mZIP_postcode;
+    }
+
+    public void setZIP_postcode(String zip_postcode) {
+        this.mZIP_postcode = zip_postcode;
+        //updateDetails();
+    }
+
+    public String getCountry() {
+        return mCountry;
+    }
+
+    public void setCountry(String country) {
+        this.mCountry = country;
+        //updateDetails();
     }
 
     private void updateDetails() {
@@ -97,10 +169,10 @@ public class ProfileViewModel extends BaseObservable{
             setUpdateEnabled(false);
             // Update the user in DB
             try {
-                User user = mUserRepository.fetchByEmail(mEmail);
+                /*User user = mUserRepository.fetchByEmail(mEmail);
                 user.setName(mName);
                 user.setPhone(mPhone);
-                mUserRepository.update(user);
+                mUserRepository.update(user);*/
                 mListener.onMessage("Profile details updated.");
             } catch (Exception e) {
                 Log.d("UpdateViewModel", "Error while updating user: " + e.getMessage());

@@ -10,9 +10,15 @@
     <string name="your_phone">YOUR PHONE NUMBER</string>
     <string name="your_email">YOUR EMAIL</string>
     <string name="your_name">YOUR NAME</string>
+    <string name="your_surname">YOUR NAME</string>
+    <string name="your_password">YOUR PASSWORD</string>
+    <string name="your_gender">YOUR GENDER</string>
     <string name="set_password">SET PASSWORD</string>
     <string name="manage_profile">MANAGE YOUR PROFILE</string>
     <string name="update">UPDATE</string>
     <string name="enter_registered_email">Please enter your registered email</string>
     <string name="reset">RESET</string>
+    <string name="title_activity_home_example">HomeActivityExample</string>
+    <string name="welcome">WELCOME HOME PAGE</string>
+
 </resources>

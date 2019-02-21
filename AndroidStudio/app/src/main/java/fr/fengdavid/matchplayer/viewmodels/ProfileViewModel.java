@@ -1,5 +1,6 @@
 package fr.fengdavid.matchplayer.viewmodels;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 
 import android.util.Log;
@@ -7,10 +8,13 @@ import android.util.Log;
 import fr.fengdavid.matchplayer.entities.User;
 import fr.fengdavid.matchplayer.repositories.UserRepository;
 import fr.fengdavid.matchplayer.validators.NameValidator;
+import fr.fengdavid.matchplayer.validators.PasswordValidator;
 import fr.fengdavid.matchplayer.validators.PhoneValidator;
 import com.rengwuxian.materialedittext.validation.METValidator;
 
 import javax.inject.Inject;
+
+import fr.fengdavid.matchplayer.requests.profilePostRequest;
 
 public class ProfileViewModel extends BaseObservable{
 
@@ -21,18 +25,28 @@ public class ProfileViewModel extends BaseObservable{
 
     private PhoneValidator mPhoneValidator;
     private NameValidator mNameValidator;
+    private PasswordValidator mPasswordValidator;
     private UserRepository mUserRepository;
+
+    public profilePostRequest profilePostRequest = new profilePostRequest(mName,mPassword,mPhone,mSurname);
+    public Context context;
 
     @Inject
     public ProfileViewModel(
             PhoneValidator phoneValidator,
             NameValidator nameValidator,
+            PasswordValidator passwordValidator,
             UserRepository userRepository
     ) {
+        mName="";
+        mSurname="";
+        mPassword="";
+        mPhone="";
         mUpdateEnabled = false;
         this.mUserRepository = userRepository;
         mPhoneValidator = phoneValidator;
         mNameValidator = nameValidator;
+        mPasswordValidator = passwordValidator;
     }
 
     public void setViewListener(ViewListener listener) {
@@ -160,8 +174,10 @@ public class ProfileViewModel extends BaseObservable{
     }
 
     private boolean isInputValid() {
-        return mPhoneValidator.isValid(mPhone, mPhone.length() == 0) &&
-                mNameValidator.isValid(mName, mName.length() == 0);
+        return mPhoneValidator.isValid(mPhone, mPhone.length() == 0) ||
+                mNameValidator.isValid(mName, mName.length() == 0) ||
+                mNameValidator.isValid(mSurname, mSurname.length() == 0) ||
+                mPasswordValidator.isValid(mPassword, mPassword.length() == 0);
     }
 
     public void onUpdateClick() {
@@ -173,6 +189,7 @@ public class ProfileViewModel extends BaseObservable{
                 user.setName(mName);
                 user.setPhone(mPhone);
                 mUserRepository.update(user);*/
+                profilePostRequest.sendProfileDataToEc2(context,mName,mPassword,mPhone,mSurname);
                 mListener.onMessage("Profile details updated.");
             } catch (Exception e) {
                 Log.d("UpdateViewModel", "Error while updating user: " + e.getMessage());
@@ -184,12 +201,16 @@ public class ProfileViewModel extends BaseObservable{
         }
     }
 
-    public METValidator getPhoneValidator() {
+    public METValidator getmPhoneValidator() {
         return mPhoneValidator;
     }
 
     public NameValidator getmNameValidator() {
         return mNameValidator;
+    }
+
+    public PasswordValidator getmPasswordValidator() {
+        return mPasswordValidator;
     }
 
     public interface ViewListener {
